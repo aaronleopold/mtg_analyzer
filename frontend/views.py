@@ -7,7 +7,10 @@ from mtgsdk import Card
 
 def dev(request):
     cards = Card.where(page=5).where(pageSize=10).all()
-    cards = list(filter(lambda card: card.image_url is not None, cards))  
+    cards = list(filter(lambda card: card.image_url is not None, cards))
+
+    print(type(cards[3].loyalty))
+    print(cards[3].loyalty)
 
     context = {
         'cards': cards
