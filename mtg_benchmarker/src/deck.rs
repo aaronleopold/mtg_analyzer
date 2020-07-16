@@ -2,8 +2,37 @@ use crate::card::{Card, CardType};
 extern crate fast_map;
 use rand::seq::SliceRandom;
 
+
+#[derive(Default, fast_map::FastMap)]
+#[fast_map(infallible = true, keys(
+    Land,
+    Creature,
+    Artifact,
+    Enchantment,
+    Planeswalker,
+    Instant,
+    Sorcery
+))]
+struct TypeDistribution(fast_map::Map7<CardType, usize>);
+
 struct DeckStats {
-    type_distribution: fast_map::Map7<CardType, usize>
+    type_distribution: TypeDistribution
+}
+
+impl DeckStats {
+    pub fn update_distribution(&mut self, _type: CardType) {
+        let current_count = self.type_distribution.get(&_type);
+
+            match current_count {
+                None => self.type_distribution.insert(&_type, 1),
+                Some(n) => self.type_distribution.insert(&_type, *n + 1)
+            };
+
+            assert_eq!(self.type_distribution.get(&_type), Some(&1));
+    } 
+
+
+
 }
 
 enum DeckFormat {
@@ -17,9 +46,9 @@ enum DeckFormat {
     PAUPER
 }
 
-struct Deck {
+pub struct Deck {
     cards: Vec<Card>,
-    // stats: DeckStats,
+    stats: DeckStats,
     format: DeckFormat
 }
 
@@ -28,7 +57,10 @@ impl Deck {
     pub fn new() -> Deck {
         Deck {
             cards: Vec::with_capacity(60),
-            format: DeckFormat::STANDARD
+            format: DeckFormat::STANDARD,
+            stats: DeckStats {
+                type_distribution: TypeDistribution::default()
+            }
         }
     }
 
@@ -39,7 +71,10 @@ impl Deck {
             "COMMANDER" => {
                 Deck {
                     cards: Vec::with_capacity(100),
-                    format: DeckFormat::COMMANDER
+                    format: DeckFormat::COMMANDER,
+                    stats: DeckStats {
+                        type_distribution: TypeDistribution::default()
+                    }
                 }
             },
             _ => Deck::new()
@@ -51,13 +86,17 @@ impl Deck {
         let mut deck = Deck::with_format(format);
 
         for card in cards {
+            let current_type = card._type.clone();
             deck.cards.push(card);
+            deck.stats.update_distribution(current_type);
         }
-
+            
         deck
     }
 
-    pub fn generate_stats() {}
+    pub fn generate_stats(&mut self) {
+        // generate type distribution
+    }
 
     fn should_mulligan(&self, draw_size: usize) -> bool {
         false
