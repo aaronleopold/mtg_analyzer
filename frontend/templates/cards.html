@@ -1,29 +1,16 @@
 
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>MTG</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+{% extends 'base.html' %}
 
-    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}" /> {% endcomment %}
-  </head>
 
-  <body>
+{% block content %}
     {% comment %} {% block content %} {% endblock %} {% endcomment %}
-    <div style="display: flex;">
+    <div class="flex">
         {% for card in cards %}
-            <div style="padding: 1rem;">
+            <div class="p-2">
                 <div>{{card.name}}</div>
                 <img src='{{card.image_url}}' />
                 <div>{{card.mana_cost}}</div>
             </div>
         {% endfor %}
     </div>
-  </body>
-</html>
+{% endblock %}
