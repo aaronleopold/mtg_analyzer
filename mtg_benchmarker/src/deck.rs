@@ -5,13 +5,13 @@ use rand::seq::SliceRandom;
 
 #[derive(Default, fast_map::FastMap)]
 #[fast_map(infallible = true, keys(
-    Land,
-    Creature,
-    Artifact,
-    Enchantment,
-    Planeswalker,
-    Instant,
-    Sorcery
+    CardType::Land,
+    CardType::Creature,
+    CardType::Artifact,
+    CardType::Enchantment,
+    CardType::Planeswalker,
+    CardType::Instant,
+    CardType::Sorcery
 ))]
 struct TypeDistribution(fast_map::Map7<CardType, usize>);
 
@@ -28,11 +28,8 @@ impl DeckStats {
                 Some(n) => self.type_distribution.insert(&_type, *n + 1)
             };
 
-            assert_eq!(self.type_distribution.get(&_type), Some(&1));
-    } 
-
-
-
+            // assert_eq!(self.type_distribution.get(&_type), Some(&1));
+    }
 }
 
 enum DeckFormat {
@@ -81,18 +78,24 @@ impl Deck {
         }
     }
 
+    pub fn insert_card(&mut self, card: Card) {
+        let current_type = card._type.clone();
+        self.cards.push(card);
+        self.stats.update_distribution(current_type)
+    }
+
     // TODO: add size checks for deck based on format passed in
     pub fn from_cards(cards: Vec<Card>, format: &str) -> Deck {
         let mut deck = Deck::with_format(format);
 
         for card in cards {
-            let current_type = card._type.clone();
-            deck.cards.push(card);
-            deck.stats.update_distribution(current_type);
+            deck.insert_card(card);
         }
             
         deck
     }
+
+
 
     pub fn generate_stats(&mut self) {
         // generate type distribution

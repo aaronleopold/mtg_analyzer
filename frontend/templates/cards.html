@@ -8,7 +8,7 @@
         {% for card in cards %}
             <div class="p-2">
                 <div>{{card.name}}</div>
-                <img src='{{card.image_url}}' />
+                <img src='{{card.image_uris.normal}}' />
                 <div>{{card.mana_cost}}</div>
             </div>
         {% endfor %}

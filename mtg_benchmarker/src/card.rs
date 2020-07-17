@@ -9,6 +9,17 @@ pub enum CardType {
     Instant,
     Sorcery
 }
+
+// #[derive(Copy, Clone)]
+// pub enum ManaType {
+//     RED,
+//     GREEN,
+//     BLUE,
+//     BLACK,
+//     WHITE,
+//     MULTICOLORED
+// }
+
 pub struct Card {
     name: String,
     mana_cost: String,
