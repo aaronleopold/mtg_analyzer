@@ -21,11 +21,11 @@ struct DeckStats {
 
 impl DeckStats {
     pub fn update_distribution(&mut self, _type: CardType) {
-        let current_count = self.type_distribution.get(&_type);
+        let current_count = self.type_distribution.get(&_type).cloned();
 
             match current_count {
                 None => self.type_distribution.insert(&_type, 1),
-                Some(n) => self.type_distribution.insert(&_type, *n + 1)
+                Some(n) => self.type_distribution.insert(&_type, n + 1)
             };
 
             // assert_eq!(self.type_distribution.get(&_type), Some(&1));
