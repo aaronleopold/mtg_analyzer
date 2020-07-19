@@ -12,6 +12,10 @@ fn main() {
         12345
     );
 
-    let mut deck = deck::Deck::from_cards(vec![card], "STANDARD");
+    let mut deck = deck::Deck::from_cards(vec![card; 60], "STANDARD");
 
+    println!("Deck length: {:?}", deck.size());
+    println!("Deck cards: \n{:?}\n", &deck.cards);
+
+    deck.run_n_simulations(1);
 }
