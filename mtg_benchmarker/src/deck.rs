@@ -173,7 +173,7 @@ impl Deck {
         // storing indices
         let mut hand: Vec<usize> = Deck::get_starting_hand(draw_size);
         
-        println!("Hand: {:?}", hand);
+        // println!("Hand: {:?}", hand);
 
         for turn in 0..2 {
             if turn != 0 {
@@ -201,12 +201,23 @@ impl Deck {
         
     }
 
-    pub fn run_n_simulations(&mut self, n: u16) {
+    // FIXME: I do not like cloning the vector every iteration
+    // but otherwise there would be race conditions
+    pub fn run_n_simulations(&mut self, n: u32) {
         (0..n).into_par_iter().for_each(|i| {
             Deck::run_simulation(&mut self.cards.clone());
         });
 
-        self.stats.fmt();
+        // self.stats.fmt();
+
+    }
+
+    pub fn run_n_simulations_nonpar(&mut self, n: u32) {
+        for i in 0..n {
+            Deck::run_simulation(&mut self.cards);
+        }
+
+        // self.stats.fmt();
 
     }
 
