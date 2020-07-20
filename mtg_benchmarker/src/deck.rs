@@ -28,6 +28,14 @@ struct TypeDistribution(fast_map::Map7<CardType, usize>);
 ))]
 struct CostDistribution(fast_map::Map7<ManaType, usize>);
 
+struct TurnStats {
+
+}
+
+struct RunStats {
+    turns: Vec<TurnStats>
+}
+
 struct DeckStats {
     type_distribution: TypeDistribution,
     cost_distribution: CostDistribution
@@ -150,7 +158,8 @@ impl Deck {
         hand
     }
 
-    fn run_simulation(cards: &Vec<Card>) {
+    fn run_simulation(cards: &Vec<Card>) -> RunStats {
+        let mut turns: Vec<TurnStats> = Vec::new();
         let mut deck_indices: Vec<usize> = (0..cards.len()).collect();
         let mut draw_size: usize = 7;
         loop {
@@ -200,30 +209,33 @@ impl Deck {
                     etc
                 make moves
         */
+
+        RunStats {
+            turns: turns
+        }
         
     }
 
     // FIXME: I do not like cloning the vector every iteration
     // but otherwise there would be race conditions
     pub fn run_n_simulations(&mut self, n: u32) {
-        (0..n).into_par_iter().for_each(|i| {
-            Deck::run_simulation(&self.cards);
-        });
+        let mut runs: Vec<RunStats> = Vec::new();
+        (0..n).into_par_iter().map(|i| {
+            Deck::run_simulation(&self.cards)
+        }).collect_into_vec(&mut runs);
 
-        // self.stats.fmt();
+        // update deck stats
 
     }
 
     pub fn run_n_simulations_nonpar(&mut self, n: u32) {
-        for i in 0..n {
-            Deck::run_simulation(&mut self.cards);
-        }
-
-        // self.stats.fmt();
-
+        let mut runs: Vec<RunStats> = Vec::new();
+        (0..n).for_each(|_| {
+            runs.push(Deck::run_simulation(&mut self.cards));
+        });
     }
 
-    pub fn size(&self) -> usize {
-        self.cards.len()
-    }
+    // pub fn size(&self) -> usize {
+    //     self.cards.len()
+    // }
 }
