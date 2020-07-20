@@ -140,20 +140,22 @@ impl Deck {
         false
     }
 
-    fn get_starting_hand(draw_size: usize) -> Vec<usize> {
+    fn get_starting_hand(draw_size: usize, deck: &Vec<usize>) -> Vec<usize> {
         let mut hand = Vec::<usize>::new();
         for i in 0..draw_size {
-            hand.push(i);
+            // hand.push(i);
+            hand.push(deck[i]);
         }
 
         hand
     }
 
-    fn run_simulation(cards: &mut Vec<Card>) {
+    fn run_simulation(cards: &Vec<Card>) {
+        let mut deck_indices: Vec<usize> = (0..cards.len()).collect();
         let mut draw_size: usize = 7;
         loop {
             let mut rng = rand::thread_rng();
-            cards.shuffle(&mut rng);
+            deck_indices.shuffle(&mut rng);
 
             if draw_size == 0 {
                 // generate very negative stats lol
@@ -171,13 +173,13 @@ impl Deck {
 
         // starting hand would be cards[0 -> draw_size - 1]
         // storing indices
-        let mut hand: Vec<usize> = Deck::get_starting_hand(draw_size);
+        let mut hand: Vec<usize> = Deck::get_starting_hand(draw_size, &deck_indices);
         
         // println!("Hand: {:?}", hand);
 
         for turn in 0..2 {
             if turn != 0 {
-                hand.push(draw_size + turn);
+                hand.push(deck_indices[draw_size + turn]);
             }
 
             // TODO: create function to 'rate' hand and determine moves, then make moves
@@ -205,7 +207,7 @@ impl Deck {
     // but otherwise there would be race conditions
     pub fn run_n_simulations(&mut self, n: u32) {
         (0..n).into_par_iter().for_each(|i| {
-            Deck::run_simulation(&mut self.cards.clone());
+            Deck::run_simulation(&self.cards);
         });
 
         // self.stats.fmt();
