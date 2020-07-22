@@ -13,6 +13,6 @@ Rust is not callable from python yet, so it will need to be built and ran separa
 ```bash
 $ cd mtg_benchmarker
 $ cargo build
-$ cargo run
+$ cargo run --release
 ```
 Running rust library manually will eventually just run the tests written for the benchmarking implementation
