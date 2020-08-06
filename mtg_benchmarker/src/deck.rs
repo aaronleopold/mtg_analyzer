@@ -28,8 +28,27 @@ struct TypeDistribution(fast_map::Map7<CardType, usize>);
 ))]
 struct CostDistribution(fast_map::Map7<ManaType, usize>);
 
-struct TurnStats {
 
+/*
+think about what should be known about each turn, disregarding
+another player, e.g:
+DrawStats {
+    _type
+    colors
+    does_flood?
+    play_potential? -> (
+        i.e. does this create a more well rounded hand. For example,
+        lets say I have 3 lands, 3 creatures and 1 instant. creatures 1 & 2
+        cost 2 & 3 mana respectively. On draw, do I draw a creature less than 2 
+        that would allow a cast earlier. E.g. If I draw a creature/something other
+        than land, and it costs 1 mana, that means I now have something to play for
+        an additional turn. Previosuly, I would have to wait until turn two to play one,
+        and turn three the next. Here, I now play something each turn.
+    )
+
+}
+*/
+struct TurnStats {
 }
 
 struct RunStats {
