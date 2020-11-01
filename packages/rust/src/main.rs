@@ -1,8 +1,9 @@
 mod deck;
 mod card;
 use std::time::Instant;
+
 fn main() {
-    let mut card = card::Card::new(
+    let card = card::Card::new(
         String::from("Test"),
         String::from("{2}{R}"),
         vec![String::from("R")],

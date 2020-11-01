@@ -237,6 +237,11 @@ impl Deck {
 
     // FIXME: I do not like cloning the vector every iteration
     // but otherwise there would be race conditions
+
+
+    // TODO: look into these:
+    // https://github.com/Amanieu/parking_lot
+    // Arc<Mutex<Vec<RunStats>>>
     pub fn run_n_simulations(&mut self, n: u32) {
         let mut runs: Vec<RunStats> = Vec::new();
         (0..n).into_par_iter().map(|i| {
