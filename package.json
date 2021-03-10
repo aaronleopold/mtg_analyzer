@@ -10,9 +10,6 @@
     "install:backend": "cd packages/backend && yarn",
     "install:all": "concurrently \"yarn install:backend\" \"yarn install:frontend\""
   },
-  "devDependencies": {
-    "concurrently": "^5.3.0"
-  },
   "workspaces": [
     "packages/*"
   ],

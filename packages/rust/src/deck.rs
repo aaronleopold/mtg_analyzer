@@ -1,7 +1,6 @@
 use crate::card::{Card, CardType, ManaType};
 extern crate fast_map;
 use rand::seq::SliceRandom;
-use rayon::prelude::*;
 
 
 #[derive(Default, fast_map::FastMap)]
@@ -48,10 +47,10 @@ DrawStats {
 
 }
 */
-struct TurnStats {
+pub struct TurnStats {
 }
 
-struct RunStats {
+pub struct RunStats {
     turns: Vec<TurnStats>
 }
 
@@ -177,9 +176,9 @@ impl Deck {
         hand
     }
 
-    fn run_simulation(cards: &Vec<Card>) -> RunStats {
+    pub fn run_simulation(&self) -> RunStats {
         let mut turns: Vec<TurnStats> = Vec::new();
-        let mut deck_indices: Vec<usize> = (0..cards.len()).collect();
+        let mut deck_indices: Vec<usize> = (0..self.cards.len()).collect();
         let mut draw_size: usize = 7;
         loop {
             let mut rng = rand::thread_rng();
@@ -242,24 +241,9 @@ impl Deck {
     // TODO: look into these:
     // https://github.com/Amanieu/parking_lot
     // Arc<Mutex<Vec<RunStats>>>
-    pub fn run_n_simulations(&mut self, n: u32) {
-        let mut runs: Vec<RunStats> = Vec::new();
-        (0..n).into_par_iter().map(|i| {
-            Deck::run_simulation(&self.cards)
-        }).collect_into_vec(&mut runs);
 
-        // update deck stats
 
+    pub fn len(&self) -> usize {
+        self.cards.len()
     }
-
-    pub fn run_n_simulations_nonpar(&mut self, n: u32) {
-        let mut runs: Vec<RunStats> = Vec::new();
-        (0..n).for_each(|_| {
-            runs.push(Deck::run_simulation(&mut self.cards));
-        });
-    }
-
-    // pub fn size(&self) -> usize {
-    //     self.cards.len()
-    // }
 }

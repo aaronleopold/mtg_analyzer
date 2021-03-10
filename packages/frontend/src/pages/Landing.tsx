@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Landing() {
-  return <div>woah there</div>;
+  return <div>home page alert</div>;
 }
