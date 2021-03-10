@@ -35,6 +35,8 @@ There is no hot-reload for the Java Spring backend at the moment, I am new to th
 
 ## Documentation
 
+TODO: see [wiki](https://github.com/aaronleopold/mtg_analyzer/wiki) for more detailed documentation
+
 ### Rust
 
 To run the Rust library testing suite:

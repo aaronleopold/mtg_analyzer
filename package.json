@@ -1,7 +1,7 @@
 {
   "name": "mtg_analyzer",
   "version": "1.0.0",
-  "license": "MIT",
+  "license": "GPLv3",
   "scripts": {
     "dev:frontend": "yarn workspace @mtg/frontend run dev",
     "dev:backend": "yarn workspace @mtg/backend run dev",
