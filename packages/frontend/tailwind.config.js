@@ -14,7 +14,6 @@ module.exports = {
     margin: ['responsive', 'last'],
   },
   plugins: [
-    require('@tailwindcss/ui'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),

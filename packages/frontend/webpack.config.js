@@ -46,7 +46,6 @@ module.exports = {
                 ],
               ],
               plugins: [
-                'relay',
                 !isProd && 'react-refresh/babel',
                 [
                   '@babel/plugin-transform-runtime',

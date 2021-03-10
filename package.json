@@ -5,10 +5,7 @@
   "scripts": {
     "dev:frontend": "yarn workspace @mtg/frontend run dev",
     "dev:backend": "yarn workspace @mtg/backend run dev",
-    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
-    "install:frontend": "cd packages/frontend && yarn",
-    "install:backend": "cd packages/backend && yarn",
-    "install:all": "concurrently \"yarn install:backend\" \"yarn install:frontend\""
+    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\""
   },
   "workspaces": [
     "packages/*"

@@ -90,7 +90,7 @@ mod tests {
   use super::*;
 
     #[test]
-    fn it_works() {
+    fn suite() {
       compare_par_v_nonpar();
     }
 }
