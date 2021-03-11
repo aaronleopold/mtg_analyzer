@@ -2,6 +2,7 @@ pub mod deck;
 pub mod card;
 
 use deck::{RunStats, Deck};
+use card::{Card, CardType};
 use rayon::prelude::*;
 use std::time::Instant;
 
@@ -43,12 +44,12 @@ fn single_benchmark(n: u32, deck: &mut Deck) {
 
 
 fn compare_par_v_nonpar() {
-    let card = card::Card::new(
+    let card = Card::new(
         String::from("Test"),
         String::from("{2}{R}"),
         vec![String::from("R")],
         vec![String::from("R")],
-        card::CardType::Creature,
+        CardType::Creature,
         2,
         1,
         12345

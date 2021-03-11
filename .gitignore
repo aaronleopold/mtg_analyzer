@@ -126,17 +126,12 @@ Control.system-ca-bundle
 GitHub.sublime-settings 
 
 # Visual Studio Code # 
-.vscode 
-!.vscode/settings.json 
-!.vscode/tasks.json 
-!.vscode/launch.json 
-!.vscode/extensions.json 
+
 .history
 
 temp
 
 node_modules
-.vscode
 .DS_STORE
 
 database.db
@@ -173,10 +168,6 @@ target
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-.vscode
 
 .mvn
 node_modules
