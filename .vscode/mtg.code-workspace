@@ -1,7 +1,14 @@
 {
   "folders": [
     {
-      "path": ".."
+      "path": "..",
+      "name": "root"
+    },
+    {
+      "path": "../packages/frontend"
+    },
+    {
+      "path": "../packages/backend"
     },
     {
       "path": "../packages/rust"

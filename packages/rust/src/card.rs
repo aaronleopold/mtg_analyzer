@@ -57,7 +57,6 @@ impl Card {
     }
 
     // FIXME: this is disgusting lol
-    // consider parsing in python prior to passing onto rust code
     pub fn mana_cost_parsed(&self) -> Vec<(ManaType, usize)>{
         let mut parsed_cost: Vec<(ManaType, usize)> = Vec::new();
         let mut new_string = String::from(&self.mana_cost);
