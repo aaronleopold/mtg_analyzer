@@ -12,13 +12,17 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/skryfall")
-public class Skryfall {
+public class SkryfallController {
     private final String baseUrl = "https://api.scryfall.com";
 
     private final RestTemplate restTemplate = getRestTemplate();
 
     @Autowired
-    public Skryfall() {}
+    public SkryfallController() {}
+
+    public String getBaseUrl() {
+        return this.baseUrl;
+    }
 
     // PLEASE REVIEW SKRYFALL'S DOCUMENTATION: https://scryfall.com/docs/api
 
@@ -31,8 +35,6 @@ public class Skryfall {
      */
     @GetMapping("/cards/search")
     public ResponseEntity<String> cardsSearch(@RequestParam() String q) {
-
-        System.out.println(this.baseUrl + "/cards/search?q=" + q);
 
         return this.restTemplate.getForEntity(
                 this.baseUrl + "/cards/search?q=" + q,

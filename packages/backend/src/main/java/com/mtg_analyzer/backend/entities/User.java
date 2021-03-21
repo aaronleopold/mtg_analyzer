@@ -27,6 +27,9 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
+    // TODO: add relation of decks
+    // TODO: figure out how to add "following" or "favorite" decks
+
 
     public User(String username, String email, String firstName, String lastName, String password) {
         this.username = username;
