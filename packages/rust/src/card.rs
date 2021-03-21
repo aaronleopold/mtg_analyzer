@@ -1,3 +1,5 @@
+use core::panic;
+
 // TODO: add support for super/subtypes
 #[derive(Copy, Clone, Debug)]
 pub enum CardType {
@@ -20,6 +22,21 @@ pub enum ManaType {
     MULTICOLORED,
     COLORLESS
 }
+
+impl From<&str> for ManaType {
+    fn from(mana_code: &str) -> ManaType {
+        match mana_code {
+            "R" => ManaType::RED,
+            "G" => ManaType::GREEN,
+            "B" => ManaType::BLUE,
+            "BL" => ManaType::BLACK,
+            "W" => ManaType::WHITE,
+            _ => todo!("handle me")
+            
+        }
+    }
+}
+
 
 #[derive(Clone)]
 pub struct Card {
@@ -45,21 +62,22 @@ impl Card {
         id: u32
     ) -> Self {
         Card {
-            name: name,
-            mana_cost: mana_cost,
-            colors: colors,
-            color_identity: color_identity,
-            _type: _type,
-            power: power,
-            toughness: toughness,
-            id: id
+            name,
+            mana_cost,
+            colors,
+            color_identity,
+            _type,
+            power,
+            toughness,
+            id
         }
     }
 
-    // FIXME: this is disgusting lol
-    pub fn mana_cost_parsed(&self) -> Vec<(ManaType, usize)>{
-        let mut parsed_cost: Vec<(ManaType, usize)> = Vec::new();
+    // FIXME/TODO: rework -> this is disgusting lol
+    pub fn get_mana(&self) -> Vec<(ManaType, usize)>{
+        // let mut parsed_cost: Vec<(ManaType, usize)> = Vec::new();
         let mut new_string = String::from(&self.mana_cost);
+
         new_string = new_string.replace("{", "");
         new_string = new_string.replace("}", " ");
         new_string = String::from(new_string.trim());
@@ -82,16 +100,7 @@ impl Card {
 
             // TODO: add all types
             let mana_type: Option<ManaType> = match str_iter.next() {
-                Some(_type) => {
-                    match _type {
-                        "R" => Some(ManaType::RED),
-                        "G" => Some(ManaType::RED),
-                        "B" => Some(ManaType::RED),
-                        "BL" => Some(ManaType::RED),
-                        "W" => Some(ManaType::RED),
-                        _ => None
-                    }
-                },
+                Some(_type) => Some(ManaType::from(_type)),
                 _ => None
             };
 
@@ -107,6 +116,10 @@ impl Card {
         }
 
         costs
+    }
+
+    pub fn get_type(&self) -> CardType {
+        self._type.clone()
     }
 }
 

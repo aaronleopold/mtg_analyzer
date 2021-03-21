@@ -136,8 +136,8 @@ impl Deck {
     }
 
     pub fn insert_card(&mut self, card: Card) {
-        let current_type = card._type.clone();
-        let parsed_cost = card.mana_cost_parsed();
+        let current_type = card.get_type();
+        let parsed_cost = card.get_mana();
 
         self.cards.push(card);
 
@@ -156,54 +156,79 @@ impl Deck {
         deck
     }
 
+    /// Given the type of card, will return probability that the next card draw
+    /// is of that type
+    pub fn probability_type(target_type: CardType) {
+
+    }
+
 
 
     pub fn generate_stats(&mut self) {
         // generate type distribution
     }
 
-    fn should_mulligan(draw_size: usize) -> bool {
-        false
+    fn hand_lands(&self, hand: &Vec<usize>){
+
+    } 
+
+    fn hand_type_count(&self, hand: &Vec<usize>, target_type: CardType) -> usize {
+        0    
     }
 
-    fn get_starting_hand(draw_size: usize, deck: &Vec<usize>) -> Vec<usize> {
-        let mut hand = Vec::<usize>::new();
-        for i in 0..draw_size {
-            // hand.push(i);
-            hand.push(deck[i]);
-        }
-
-        hand
+    // 1). priority_type -> user declared priority (i.e. creatures or instants)
+    //     these will determine how many of type is good to have at once
+    // 2). 
+    fn should_mulligan(&self, hand: &Vec<usize>) -> bool {
+        // how many priority types are there in my hand? enough for 2-3 turns?
+        // are there enough lands given the hand and probility for next card land?
+        // 
+        true
     }
 
     pub fn run_simulation(&self) -> RunStats {
-        let mut turns: Vec<TurnStats> = Vec::new();
+        let turns: Vec<TurnStats> = Vec::new();
         let mut deck_indices: Vec<usize> = (0..self.cards.len()).collect();
         let mut draw_size: usize = 7;
-        loop {
-            let mut rng = rand::thread_rng();
-            deck_indices.shuffle(&mut rng);
 
+        let mut hand: Vec::<usize> = Vec::new();
+
+        // this is the first turn loop, checking if the hand should be 
+        // mulliganed. Realistically this should have a floor of 3-4, but I 
+        // let it go to 0 just because I am curious what would happen.
+        loop {
             if draw_size == 0 {
                 // generate very negative stats lol
                 break;
             }
-            
-            if Deck::should_mulligan(draw_size) {
-                draw_size -= 1;
-            }
 
-            else {
+            let mut rng = rand::thread_rng();
+
+            deck_indices.shuffle(&mut rng);
+
+            // starting hand would be cards[0 -> draw_size - 1]
+            // storing indices
+            hand = 
+                (0..draw_size)
+                .into_iter()
+                .map(|i| deck_indices[i])
+                .collect();
+            
+            if self.should_mulligan(&hand) {
+                draw_size -= 1;
+            } else {
                 break;
             }
         }
 
-        // starting hand would be cards[0 -> draw_size - 1]
-        // storing indices
-        let mut hand: Vec<usize> = Deck::get_starting_hand(draw_size, &deck_indices);
+        // // starting hand would be cards[0 -> draw_size - 1]
+        // // storing indices
+        // let mut hand: Vec<usize> = 
+        //     (0..draw_size)
+        //     .into_iter()
+        //     .map(|i| deck_indices[i])
+        //     .collect();
         
-        // println!("Hand: {:?}", hand);
-
         for turn in 0..2 {
             if turn != 0 {
                 hand.push(deck_indices[draw_size + turn]);
@@ -233,15 +258,6 @@ impl Deck {
         }
         
     }
-
-    // FIXME: I do not like cloning the vector every iteration
-    // but otherwise there would be race conditions
-
-
-    // TODO: look into these:
-    // https://github.com/Amanieu/parking_lot
-    // Arc<Mutex<Vec<RunStats>>>
-
 
     pub fn len(&self) -> usize {
         self.cards.len()
