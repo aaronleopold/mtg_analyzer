@@ -4,7 +4,7 @@ A program to run analyses on MTG decks by simulating beginning game draws / mull
 
 ## Getting Started
 
-Currently, the Rust code is not connected to the React application. Eventually, once the library is closer to completion, they will be connected.
+Currently, the Rust code is not connected to the web application. Eventually, once the library is closer to completion, they will be connected. I recently moved the frontend over to using Svelte, so hopefully by the time integration is ready there will be nice WASM support :D
 
 To run everything concurrently:
 
@@ -15,15 +15,13 @@ yarn dev
 
 Alternatively, you may run the frontend and backend separately:
 
-### React Frontend
+### Svelte Frontend
 
-To run the React application:
+To run the Svelte frontend:
 
 ```bash
 yarn dev:frontend
 ```
-
-This will run the suite of tests. Please note that these tests are computationally intense and will require some decent CPU power.
 
 ### Spring Backend
 
@@ -43,6 +41,8 @@ To run the Rust library testing suite:
 yarn test:rust
 ```
 
+This will run the suite of tests. Please note that these tests are computationally intense and will require some decent CPU power.
+
 ## Documentation
 
 TODO: create this -> see [wiki](https://github.com/aaronleopold/mtg_analyzer/wiki) for more detailed documentation
@@ -59,8 +59,8 @@ TODO: add this information into the readme
 
 TODO: add this information into the readme
 
-### React Frontend
+### Svelte Frontend
 
-The React frontend is written in TypeScript and uses Tailwind CSS for the styling of components.
+The Svelte frontend uses Tailwind CSS for the styling of components/pages.
 
 TODO: add more information into the readme
