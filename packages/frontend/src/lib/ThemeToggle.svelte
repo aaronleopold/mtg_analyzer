@@ -25,7 +25,7 @@
   {#if theme === 'dark'}
     <span title="Toggle Light Theme"
       ><svg
-        class="w-6 h-6"
+        class="w-5 h-5"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -41,7 +41,7 @@
   {:else}
     <span title="Toggle Dark Theme"
       ><svg
-        class="w-6 h-6"
+        class="w-5 h-5"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

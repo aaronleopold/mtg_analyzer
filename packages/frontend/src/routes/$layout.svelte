@@ -15,11 +15,11 @@
   onDestroy(unsubscribe);
 </script>
 
-<main
-  class="full-w-header pt-6 lg:pt-12 px-4 xs:px-0 max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-5xl mx-auto"
->
+<main class="full-w-header flex flex-col">
   <Header path={current_path} />
-  <div class="pt-6 flex-1">
+  <div
+    class="max-w-sm sm:max-w-2xl md:max-w-6xl lg:max-w-7xl mx-auto flex-1 w-full mt-4"
+  >
     <slot />
   </div>
 </main>
