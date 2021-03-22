@@ -2,6 +2,7 @@ package com.mtg_analyzer.backend.controllers;
 
 import com.mtg_analyzer.backend.entities.User;
 import com.mtg_analyzer.backend.exceptions.BadRequestException;
+import com.mtg_analyzer.backend.exceptions.UnauthenticatedException;
 import com.mtg_analyzer.backend.exceptions.UserAuthenticationException;
 import com.mtg_analyzer.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.EntityExistsException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.Optional;
 
 
 // TODO: look into *secure* authentication using Spring. Consider splitting up Authentication to separate controller.
@@ -49,7 +52,7 @@ public class UserController {
             throw new BadRequestException("You must provide either an email or username to login.");
         }
 
-        User user;
+        Optional<User> user;
 
         if (username != null) {
             user = userRepository.findByUsername(username);
@@ -57,12 +60,14 @@ public class UserController {
             user = userRepository.findByEmail(email);
         }
 
-        if (user == null || !this.passwordEncoder.matches(password, user.getPassword())) {
+        // IDE did not like isEmpty here
+        if (!user.isPresent() || !this.passwordEncoder.matches(password, user.get().getPassword())) {
             // I am not going to tell users if the account exists or if they used wrong creds
             throw new UserAuthenticationException("Unable to login using those credentials.");
         } else {
             // TODO: I do NOT like returning the password, I need to research more about auth
-            return ResponseEntity.ok(user);
+//            request.getSession().setAttribute("VIEWER", user.getId());
+            return ResponseEntity.ok(user.get());
         }
     }
 
@@ -95,6 +100,24 @@ public class UserController {
             // on the client (like malformed email or whatever)
             throw new UserAuthenticationException("Something went wrong during the registration process.");
         }
+
+    }
+
+    @PostMapping("/viewer")
+    public ResponseEntity<User> viewer(HttpServletRequest request) {
+            try {
+                User viewer = userRepository.findById(
+                        (Long) request.getSession().getAttribute("VIEWER")
+                ).orElse(null);
+
+                if (viewer != null) {
+                    return ResponseEntity.ok(viewer);
+                } else {
+                    throw new UnauthenticatedException("No session found");
+                }
+            } catch (Exception e) {
+                throw new UnauthenticatedException("No session found");
+            }
 
     }
 
