@@ -1,6 +1,6 @@
-package com.mtg_analyzer.backend.repositories;
+package com.mtg_analyzer.backend.repository;
 
-import com.mtg_analyzer.backend.entities.User;
+import com.mtg_analyzer.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

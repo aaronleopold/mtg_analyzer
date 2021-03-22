@@ -1,6 +1,6 @@
-package com.mtg_analyzer.backend.controllers;
+package com.mtg_analyzer.backend.controller;
 
-import com.mtg_analyzer.backend.exceptions.BadRequestException;
+import com.mtg_analyzer.backend.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class SkryfallController {
 
         return this.restTemplate.getForEntity(
                 this.baseUrl + "/cards/search?q=" + q,
-                    String.class
+                String.class
         );
     }
 

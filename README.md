@@ -6,6 +6,18 @@ A program to run analyses on MTG decks by simulating beginning game draws / mull
 
 Currently, the Rust code is not connected to the web application. Eventually, once the library is closer to completion, they will be connected. I recently moved the frontend over to using Svelte, so hopefully by the time integration is ready there will be nice WASM support :D
 
+### Config
+
+Currently you'll only need to set up `application.yml` for the Spring backend. It has the following structure:
+
+```yml
+# mtg_analyzer/packages/backend/src/main/resources/application.yml
+jwt:
+  secret: secretgoeshere
+```
+
+### Run
+
 To run everything concurrently:
 
 ```bash
@@ -15,7 +27,7 @@ yarn dev
 
 Alternatively, you may run the frontend and backend separately:
 
-### Svelte Frontend
+#### Svelte Frontend
 
 To run the Svelte frontend:
 
@@ -23,7 +35,7 @@ To run the Svelte frontend:
 yarn dev:frontend
 ```
 
-### Spring Backend
+#### Spring Backend
 
 To run the Spring backend, ensure you have at least Java 1.8 and Maven 3.6.3 installed on your machine. You may run the following from the project root:
 

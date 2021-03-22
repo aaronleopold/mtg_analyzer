@@ -1,18 +1,17 @@
 package com.mtg_analyzer.backend.bootstrap;
 
-import com.mtg_analyzer.backend.entities.User;
-import com.mtg_analyzer.backend.repositories.UserRepository;
+import com.mtg_analyzer.backend.entity.User;
+import com.mtg_analyzer.backend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Bootstrap implements CommandLineRunner {
-
+public class Bootstrap implements CommandLineRunner  {
     private final UserRepository userRepository;
 
     public Bootstrap(UserRepository userRepository) {
-         this.userRepository = userRepository;
-     }
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {
