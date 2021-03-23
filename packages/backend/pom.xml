@@ -8,11 +8,11 @@
 		<version>2.3.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.dailycodebuffer</groupId>
-	<artifactId>JWT-Demo</artifactId>
+	<groupId>com.mtg_analyzer</groupId>
+	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JWT-Demo</name>
-	<description>JWT-Demo</description>
+	<description>backend for mtg_analyzer</description>
 
 	<properties>
 		<java.version>11</java.version>
