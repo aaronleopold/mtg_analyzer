@@ -22,7 +22,8 @@
     "paths": {
       "$app/*": [".svelte/dev/runtime/app/*", ".svelte/build/runtime/app/*"],
       "$lib/*": ["src/lib/*"],
-      "$utils/*": ["src/lib/utils/*"]
+      "$utils/*": ["src/lib/utils/*"],
+      "$api/*": ["src/api/*"]
     }
   },
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]

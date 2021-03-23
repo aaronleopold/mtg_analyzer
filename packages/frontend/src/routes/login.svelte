@@ -1,13 +1,20 @@
 <script lang="ts">
+  import login from '../api/login';
+
   let username: string;
   let password: string;
+
+  async function handleSubmit() {
+    await login(username, password);
+  }
 </script>
 
 <div
   class="full-w-header-pad bg-white flex rounded-md overflow-hidden shadow-sm"
 >
-  <div
+  <form
     class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
+    on:submit|preventDefault={handleSubmit}
   >
     <div class="mx-auto w-full max-w-sm lg:w-96">
       <h2 class="mb-6 text-3xl font-extrabold text-gray-900">
@@ -79,6 +86,7 @@
                 autocomplete="username"
                 required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                bind:value={username}
               />
             </div>
           </div>
@@ -137,7 +145,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
   <div class="hidden lg:block relative w-0 flex-1">
     <img
       class="absolute inset-0 h-full w-full object-cover"
