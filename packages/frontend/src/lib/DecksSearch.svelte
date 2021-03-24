@@ -7,7 +7,7 @@
   let deckSource = 'all';
 </script>
 
-<div class="border-b border-gray-200">
+<div class="border-b border-gray-200 dark:border-dark-500">
   <nav class="mb-2 flex justify-between items-center" aria-label="Tabs">
     <div class="flex space-x-8">
       <span

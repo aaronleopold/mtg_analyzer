@@ -1,11 +1,18 @@
 <script lang="ts">
   import login from '../api/login';
+  import { goto } from '$app/navigation';
+  import { authStore } from '../stores/auth';
 
   let username: string;
   let password: string;
 
   async function handleSubmit() {
-    await login(username, password);
+    const token = await login(username, password);
+
+    if (token) {
+      authStore.logUserIn({ username }, token);
+      goto('/');
+    }
   }
 </script>
 

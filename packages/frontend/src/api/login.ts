@@ -1,8 +1,6 @@
 import api from '.';
 
 export default async function login(username: string, password: string) {
-  console.log(username, password);
-
   const token = await api
     .post('/user/login', { username, password })
     .then((res) => res.jwtToken)
@@ -11,7 +9,5 @@ export default async function login(username: string, password: string) {
       return null;
     });
 
-  console.log(token);
-
-  // TODO: store this token in svelte store!
+  return token;
 }

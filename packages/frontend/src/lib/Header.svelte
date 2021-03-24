@@ -1,10 +1,8 @@
 <script lang="ts">
+  import { loggedIn } from '../stores/auth';
   import ThemeToggle from './ThemeToggle.svelte';
 
   export let path;
-
-  // TODO: add logged in vs logged out state
-  let loggedIn = false;
 </script>
 
 <nav class="h-16 w-full shadow-sm bg-white dark:bg-dark-800">
@@ -29,7 +27,7 @@
       >
         Browse
       </a>
-      {#if loggedIn}
+      {#if $loggedIn}
         <a
           href="/profile"
           class="hover:text-gray-700 dark:hover:text-gray-200"
