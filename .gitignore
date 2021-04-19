@@ -229,3 +229,4 @@ node_modules
 .svelte
 /build
 /functions
+svelte

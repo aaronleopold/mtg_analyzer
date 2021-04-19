@@ -61,12 +61,13 @@ struct DeckStats {
 
 impl DeckStats {
     pub fn update_type_distribution(&mut self, _type: CardType) {
-        let current_count = self.type_distribution.get(&_type).cloned();
+            let current_count: usize = 
+                self.type_distribution
+                    .get(&_type)
+                    .cloned()
+                    .unwrap_or_else(|| 0);
 
-            match current_count {
-                None => self.type_distribution.insert(&_type, 1),
-                Some(n) => self.type_distribution.insert(&_type, n + 1)
-            };
+            self.type_distribution.insert(&_type, current_count + 1);
     }
 
     pub fn update_cost_distribution(&mut self, costs: Vec<(ManaType, usize)>) {
@@ -81,7 +82,6 @@ impl DeckStats {
     }
 
     fn fmt(&self) {
-
         println!("Red cost overall: {:?}", self.cost_distribution.get(ManaType::RED).unwrap());
 
     }
@@ -89,13 +89,23 @@ impl DeckStats {
 
 enum DeckFormat {
     STANDARD,
-    MODERN,
+    // MODERN,
     COMMANDER,
-    LEGACY,
-    VINTAGE,
-    BRAWL,
-    THGIANT,
-    PAUPER
+    // LEGACY,
+    // VINTAGE,
+    // BRAWL,
+    // THGIANT,
+    // PAUPER
+}
+
+impl From<&str> for DeckFormat {
+    fn from(format: &str) -> DeckFormat {
+        match format {
+            "STANDARD" => DeckFormat::STANDARD,
+            "COMMANDER" => DeckFormat::COMMANDER,
+            _ => todo!("handle me")
+        }
+    }
 }
 
 pub struct Deck {
@@ -119,9 +129,9 @@ impl Deck {
 
     /// Creates a new deck, with soecified format
     pub fn with_format(format: &str) -> Deck {
-        match format {
-            "STANDARD" => Deck::new(),
-            "COMMANDER" => {
+        match DeckFormat::from(format) {
+            DeckFormat::STANDARD => Deck::new(),
+            DeckFormat::COMMANDER => {
                 Deck {
                     cards: Vec::with_capacity(100),
                     format: DeckFormat::COMMANDER,

@@ -4,7 +4,7 @@ A program to run analyses on MTG decks by simulating beginning game draws / mull
 
 ## Getting Started
 
-Currently, the Rust code is not connected to the web application. Eventually, once the library is closer to completion, they will be connected. I recently moved the frontend over to using Svelte, so hopefully by the time integration is ready there will be nice WASM support :D
+Currently, the Rust code is not connected to the web application. Eventually, once the library is closer to completion, they will be connected. ~~I recently moved the frontend over to using Svelte~~ I just migrated over to Angular from Svelte. There is ABSOLUTELY NOTHING wrong with svelte, this project is just a way for me to learn technologies I will be using in my upcoming internship this summer. I learned that I will be using Angular, so I changed the tech stack again (perhaps a few times too many :D!)
 
 ### Config
 
@@ -27,9 +27,9 @@ yarn dev
 
 Alternatively, you may run the frontend and backend separately:
 
-#### Svelte Frontend
+#### Angular Frontend
 
-To run the Svelte frontend:
+To run the Angular frontend:
 
 ```bash
 yarn dev:frontend
@@ -71,8 +71,8 @@ TODO: add this information into the readme
 
 TODO: add this information into the readme
 
-### Svelte Frontend
+### Angular Frontend
 
-The Svelte frontend uses Tailwind CSS for the styling of components/pages.
+The Angular frontend uses Tailwind CSS for the styling of components/pages.
 
 TODO: add more information into the readme

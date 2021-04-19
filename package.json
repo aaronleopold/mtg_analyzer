@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "GPLv3",
   "scripts": {
-    "dev:frontend": "yarn workspace @mtg/frontend run dev",
+    "dev:frontend": "yarn workspace @mtg/frontend run start",
     "dev:backend": "yarn workspace @mtg/backend run dev",
     "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
     "test:rust": "cd packages/rust && cargo test suite --release"
