@@ -25,3 +25,9 @@
 .text-shadow {
   text-shadow: 0px 0px 1px rgb(0 0 0 / 20%), 0px 0px 1px rgb(1 0 5 / 10%);
 }
+
+.banner-bg {
+  background-size: cover;
+  background: linear-gradient(rgba(33, 51, 120, 0), rgba(33, 51, 120, 1)),
+    url('./assets/banner.jpeg');
+}

@@ -26,6 +26,9 @@ module.exports = {
         },
       },
     },
+    height: {
+      '60vh': '60vh',
+    },
   },
   variants: {
     extend: {},

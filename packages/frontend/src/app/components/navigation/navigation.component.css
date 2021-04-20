@@ -1,0 +1,11 @@
+.home-link {
+  @apply text-dark-200;
+}
+
+.base-link {
+  @apply text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-200;
+}
+
+.active-link {
+  @apply text-gray-900;
+}
