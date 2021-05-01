@@ -28,6 +28,7 @@ module.exports = {
     },
     height: {
       '60vh': '60vh',
+      '40vh': '40vh',
     },
   },
   variants: {

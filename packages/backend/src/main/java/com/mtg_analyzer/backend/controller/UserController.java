@@ -49,7 +49,7 @@ public class UserController {
         final String token =
                 jwtUtility.generateToken(userDetails);
 
-        return  new JwtResponse(token);
+        return new JwtResponse(token);
 
     }
 

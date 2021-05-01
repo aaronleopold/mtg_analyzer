@@ -1,7 +1,8 @@
 {
   "name": "mtg_analyzer",
   "version": "1.0.0",
-  "license": "GPLv3",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "dev:frontend": "yarn workspace @mtg/frontend run start",
     "dev:backend": "yarn workspace @mtg/backend run dev",
@@ -11,5 +12,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": true
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
 }

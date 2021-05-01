@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +11,9 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { FooterComponent } from './components/footer/footer.component';
 import { DeckDetailComponent } from './pages/deck-detail/deck-detail.component';
 import { DeckSearchComponent } from './pages/deck-search/deck-search.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { ButtonComponent } from './components/ui/button/button.component';
+import { RadioComponent } from './components/ui/radio/radio.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +24,11 @@ import { DeckSearchComponent } from './pages/deck-search/deck-search.component';
     FooterComponent,
     DeckDetailComponent,
     DeckSearchComponent,
+    BannerComponent,
+    ButtonComponent,
+    RadioComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,1 +1,6 @@
-<p>login works!</p>
+<form #userForm="ngForm" (ngSubmit)="attemptLogin(userForm.value)">
+  <input name="username" placeholder="username" ngModel />
+  <input name="password" placeholder="password" ngModel />
+
+  <button>test</button>
+</form>
